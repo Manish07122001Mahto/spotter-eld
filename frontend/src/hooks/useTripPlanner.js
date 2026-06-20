@@ -10,6 +10,7 @@ export function useTripPlanner() {
   });
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [slowLoading, setSlowLoading] = useState(false);
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -39,8 +40,10 @@ export function useTripPlanner() {
       return;
     }
     setLoading(true);
+    setSlowLoading(false);
     setError("");
     setResult(null);
+    const slowTimer = setTimeout(() => setSlowLoading(true), 8000);
     try {
       const data = await tripService.planTrip(form);
       setResult(data);
@@ -54,7 +57,9 @@ export function useTripPlanner() {
     } catch (err) {
       setError(err.message);
     } finally {
+      clearTimeout(slowTimer);
       setLoading(false);
+      setSlowLoading(false);
     }
   };
 
@@ -64,6 +69,7 @@ export function useTripPlanner() {
     form,
     result,
     loading,
+    slowLoading,
     error,
     clearError,
     handleChange,

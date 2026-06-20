@@ -3,7 +3,7 @@ import axios from "axios";
 const http = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: { "Content-Type": "application/json" },
-  timeout: 30000,
+  timeout: 70000,
 });
 
 http.interceptors.response.use(
@@ -11,7 +11,7 @@ http.interceptors.response.use(
   (error) => {
     let message;
     if (error.code === "ECONNABORTED") {
-      message = "Request timed out. Please try again.";
+      message = "Server took too long to respond. It may still be warming up - please try again in a moment.";
     } else if (!error.response) {
       message = "Unable to reach the server. Please check your connection.";
     } else {

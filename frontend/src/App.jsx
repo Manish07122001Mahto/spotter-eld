@@ -16,6 +16,7 @@ export default function App() {
     form,
     result,
     loading,
+    slowLoading,
     error,
     clearError,
     handleChange,
@@ -139,11 +140,16 @@ export default function App() {
                 fontSize: 15,
                 fontWeight: 600,
                 color: "#1B3A5C",
-                margin: "0 0 4px",
+                margin: "0 0 6px",
               }}
             >
               Planning your route...
             </p>
+            {slowLoading && (
+              <p style={{ fontSize: 13, color: "#8AA8C0", margin: 0 }}>
+                Server is warming up, this may take a moment...
+              </p>
+            )}
           </div>
         )}
 
