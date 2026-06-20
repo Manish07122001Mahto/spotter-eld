@@ -98,4 +98,3 @@ src/
 - **react-leaflet 4** - interactive map
 - **axios** - HTTP client with error normalisation
 - **Inter** (Google Fonts) - UI font
-
