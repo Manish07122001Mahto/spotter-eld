@@ -10,22 +10,27 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { STOP_COLORS, STOP_LABELS } from "../../constants/stopConfig";
+import { STOP_COLORS, STOP_LABELS, STOP_ICONS } from "../../constants/stopConfig";
 
-function createPinIcon(color, active = false) {
-  const w = active ? 32 : 24;
-  const h = active ? 42 : 32;
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 24 32">
-    <path d="M12 0C7.58 0 4 3.58 4 8c0 5.5 8 24 8 24s8-18.5 8-24c0-4.42-3.58-8-8-8z"
-      fill="${color}" stroke="rgba(0,0,0,0.25)" stroke-width="1"/>
-    <circle cx="12" cy="8" r="4" fill="white" opacity="0.88"/>
+function createPinIcon(color, iconPaths, active = false) {
+  const s = active ? 40 : 32;
+  const totalH = s + 10;
+  const r = Math.round(s * 0.28);
+  const offset = ((s - 16) / 2).toFixed(1);
+  const cx = s / 2;
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${totalH}" viewBox="0 0 ${s} ${totalH}">
+    <rect x="1" y="1" width="${s - 2}" height="${s - 2}" rx="${r}" fill="${color}" stroke="rgba(0,0,0,0.22)" stroke-width="1.2"/>
+    <polygon points="${cx - 6},${s - 1} ${cx + 6},${s - 1} ${cx},${totalH - 1}" fill="${color}"/>
+    <g transform="translate(${offset},${offset})">${iconPaths}</g>
   </svg>`;
+
   return L.divIcon({
     html: svg,
     className: "",
-    iconSize: [w, h],
-    iconAnchor: [w / 2, h],
-    popupAnchor: [0, -h + 4],
+    iconSize: [s, totalH],
+    iconAnchor: [s / 2, totalH],
+    popupAnchor: [0, -totalH + 4],
   });
 }
 
@@ -61,12 +66,13 @@ function MapContent({ mapData, activeIndex, isModal, bounds, resetSignal }) {
       />
       {mapData.stops.map((stop, i) => {
         const color = STOP_COLORS[stop.type] || "#1B3A5C";
+        const iconPaths = STOP_ICONS[stop.type] || STOP_ICONS.start;
         const isActive = i === activeIndex;
         return (
           <Marker
             key={i}
             position={[stop.lat, stop.lng]}
-            icon={createPinIcon(color, isActive)}
+            icon={createPinIcon(color, iconPaths, isActive)}
           >
             <Tooltip direction="top" offset={[0, -38]} className="eld-tooltip">
               <div>

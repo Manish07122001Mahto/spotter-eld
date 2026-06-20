@@ -9,7 +9,7 @@ import ELDSection from "./components/eld/ELDSection";
 import SectionHeader from "./components/common/SectionHeader";
 import ErrorToast from "./components/common/ErrorToast";
 import ScrollToTop from "./components/common/ScrollToTop";
-import { STOP_COLORS, STOP_LABELS } from "./constants/stopConfig";
+import { STOP_COLORS, STOP_LABELS, STOP_ICONS } from "./constants/stopConfig";
 
 export default function App() {
   const {
@@ -201,16 +201,23 @@ export default function App() {
                         transition: "background 0.15s",
                       }}
                     >
-                      <div
-                        style={{
-                          width: 9,
-                          height: 9,
-                          borderRadius: "50%",
-                          background: dotColor,
-                          marginTop: 4,
-                          flexShrink: 0,
-                        }}
-                      />
+                      <div style={{
+                        width: 28,
+                        height: 28,
+                        borderRadius: 7,
+                        background: dotColor,
+                        flexShrink: 0,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}>
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          dangerouslySetInnerHTML={{ __html: STOP_ICONS[stop.type] || STOP_ICONS.start }}
+                        />
+                      </div>
                       <div>
                         <div
                           style={{
