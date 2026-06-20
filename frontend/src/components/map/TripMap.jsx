@@ -4,7 +4,6 @@ import {
   TileLayer,
   Polyline,
   Marker,
-  Popup,
   Tooltip,
   useMap,
 } from "react-leaflet";
@@ -105,14 +104,6 @@ function MapContent({ mapData, activeIndex, isModal, bounds, resetSignal }) {
                 )}
               </div>
             </Tooltip>
-            <Popup>
-              <strong>{stop.label}</strong>
-              {stop.duration_hrs > 0 && (
-                <div style={{ marginTop: 2, color: "#555" }}>
-                  {stop.duration_hrs}h stop
-                </div>
-              )}
-            </Popup>
           </Marker>
         );
       })}
