@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+body {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 14px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.map-stops-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+  .map-stops-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+@media (max-width: 640px) {
+  .main-content {
+    padding: 14px 12px;
+  }
+}
+
+.navbar-inner {
+  padding: 0 32px;
+}
+
+@media (max-width: 640px) {
+  .navbar-inner {
+    padding: 0 16px;
+  }
+}
+
+.desc-strip {
+  padding: 12px 32px;
+}
+
+@media (max-width: 640px) {
+  .desc-strip {
+    padding: 10px 16px;
+  }
+}
+
+.eld-tooltip {
+  background: #fff !important;
+  border: 1px solid #c8d8e8 !important;
+  border-radius: 7px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.13) !important;
+  padding: 8px 11px !important;
+  font-family: "Inter", Arial, sans-serif !important;
+  white-space: nowrap;
+}
+.eld-tooltip.leaflet-tooltip-top::before {
+  border-top-color: #c8d8e8 !important;
+}
+.eld-tooltip.leaflet-tooltip-bottom::before {
+  border-bottom-color: #c8d8e8 !important;
+}
+
+@media (max-width: 480px) {
+  .summary-cards {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
