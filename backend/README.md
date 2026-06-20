@@ -24,10 +24,10 @@ python manage.py runserver
 
 ## Endpoints
 
-| Method | URL | Description |
-|--------|-----|-------------|
-| GET | `/api/health/` | Health check - returns `{"status": "ok"}` |
-| POST | `/api/trip/plan/` | Plan a trip and return HOS logs |
+| Method | URL               | Description                               |
+| ------ | ----------------- | ----------------------------------------- |
+| GET    | `/api/health/`    | Health check - returns `{"status": "ok"}` |
+| POST   | `/api/trip/plan/` | Plan a trip and return HOS logs           |
 
 ### POST `/api/trip/plan/` request body
 
@@ -45,4 +45,3 @@ python manage.py runserver
 ```bash
 python manage.py test trip.tests
 ```
-
