@@ -6,10 +6,10 @@ React + Vite frontend for the ELD Trip Planner. Plan HOS-compliant truck routes 
 
 ## Prerequisites
 
-| Tool | Minimum version |
-|------|----------------|
-| Node.js | 18 |
-| npm | 9 |
+| Tool    | Minimum version |
+| ------- | --------------- |
+| Node.js | 18              |
+| npm     | 9               |
 
 ---
 
@@ -45,11 +45,11 @@ Opens at `http://localhost:5173`. Requires the backend running and `VITE_API_BAS
 
 ## Available scripts
 
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start dev server with hot reload |
-| `npm run build` | Build for production (output: `dist/`) |
-| `npm run preview` | Preview the production build locally |
+| Script            | Description                            |
+| ----------------- | -------------------------------------- |
+| `npm run dev`     | Start dev server with hot reload       |
+| `npm run build`   | Build for production (output: `dist/`) |
+| `npm run preview` | Preview the production build locally   |
 
 ---
 
@@ -98,4 +98,3 @@ src/
 - **react-leaflet 4** - interactive map
 - **axios** - HTTP client with error normalisation
 - **Inter** (Google Fonts) - UI font
-
