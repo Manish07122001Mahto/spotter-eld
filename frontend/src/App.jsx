@@ -24,6 +24,7 @@ export default function App() {
   } = useTripPlanner();
   const cycleVal = parseFloat(form.current_cycle_used) || 0;
   const [activeStopIndex, setActiveStopIndex] = useState(null);
+  const [hoveredStopIndex, setHoveredStopIndex] = useState(null);
 
   useEffect(() => {
     setActiveStopIndex(null);
@@ -165,6 +166,7 @@ export default function App() {
                 <TripMap
                   mapData={result.map_data}
                   activeStopIndex={activeStopIndex}
+                  hoveredStopIndex={hoveredStopIndex}
                 />
               </div>
 
@@ -179,11 +181,14 @@ export default function App() {
                 <SectionHeader title="Route Stops" />
                 {result.map_data.stops.map((stop, i) => {
                   const isActive = i === activeStopIndex;
+                  const isRowHovered = i === hoveredStopIndex;
                   const dotColor = STOP_COLORS[stop.type] || "#1B3A5C";
                   return (
                     <div
                       key={i}
                       onClick={() => setActiveStopIndex(isActive ? null : i)}
+                      onMouseEnter={() => setHoveredStopIndex(i)}
+                      onMouseLeave={() => setHoveredStopIndex(null)}
                       style={{
                         display: "flex",
                         alignItems: "flex-start",
@@ -191,14 +196,16 @@ export default function App() {
                         padding: "11px 14px",
                         borderBottom:
                           i < result.map_data.stops.length - 1
-                            ? "1px solid #F0F6FC"
+                            ? "1px solid #C8D8E8"
                             : "none",
                         cursor: "pointer",
-                        background: isActive ? "#F4F8FC" : "transparent",
+                        background: isActive ? "#EBF3FA" : isRowHovered ? "#F4F8FC" : "transparent",
                         borderLeft: isActive
                           ? `3px solid ${dotColor}`
+                          : isRowHovered
+                          ? `3px solid ${dotColor}55`
                           : "3px solid transparent",
-                        transition: "background 0.15s",
+                        transition: "background 0.15s, border-left 0.15s",
                       }}
                     >
                       <div style={{

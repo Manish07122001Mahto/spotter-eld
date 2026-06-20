@@ -11,8 +11,8 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { STOP_COLORS, STOP_LABELS, STOP_ICONS } from "../../constants/stopConfig";
 
-function createPinIcon(color, iconPaths, active = false) {
-  const s = active ? 40 : 32;
+function createPinIcon(color, iconPaths, active = false, hovered = false) {
+  const s = active ? 40 : hovered ? 36 : 32;
   const totalH = s + 10;
   const r = Math.round(s * 0.28);
   const offset = ((s - 16) / 2).toFixed(1);
@@ -54,7 +54,7 @@ function MapResetControl({ bounds, resetSignal }) {
   return null;
 }
 
-function MapContent({ mapData, activeIndex, isModal, bounds, resetSignal }) {
+function MapContent({ mapData, activeIndex, hoveredIndex, isModal, bounds, resetSignal }) {
   return (
     <>
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -67,11 +67,12 @@ function MapContent({ mapData, activeIndex, isModal, bounds, resetSignal }) {
         const color = STOP_COLORS[stop.type] || "#1B3A5C";
         const iconPaths = STOP_ICONS[stop.type] || STOP_ICONS.start;
         const isActive = i === activeIndex;
+        const isHovered = i === hoveredIndex;
         return (
           <Marker
             key={i}
             position={[stop.lat, stop.lng]}
-            icon={createPinIcon(color, iconPaths, isActive)}
+            icon={createPinIcon(color, iconPaths, isActive, isHovered)}
           >
             <Tooltip direction="top" offset={[0, -38]} className="eld-tooltip">
               <div>
@@ -126,7 +127,7 @@ const btnStyle = {
   boxShadow: "0 1px 4px rgba(0,0,0,0.15)",
 };
 
-export default function TripMap({ mapData, activeStopIndex }) {
+export default function TripMap({ mapData, activeStopIndex, hoveredStopIndex }) {
   const [fullscreen, setFullscreen] = useState(false);
   const [resetSignal, setResetSignal] = useState(0);
   const [modalResetSignal, setModalResetSignal] = useState(0);
@@ -153,6 +154,7 @@ export default function TripMap({ mapData, activeStopIndex }) {
           <MapContent
             mapData={mapData}
             activeIndex={activeStopIndex}
+            hoveredIndex={hoveredStopIndex}
             isModal={false}
             bounds={bounds}
             resetSignal={resetSignal}
